@@ -36,8 +36,14 @@ namespace Delegates
             MyDelegate myDelegate = new MyDelegate(LogicalOperations.InitialParameters);
             //Assigning additional methods to delegate
             myDelegate += LogicalOperations.AND;
-            myDelegate += LogicalOperations.OR;
-            myDelegate += LogicalOperations.XOR;
+            //Assigning anonymous method to delegate
+            myDelegate += delegate(bool p, bool q)
+            {
+                Console.WriteLine("OR(Anonym method): " + (p || q));
+            };
+            //Assigning anonymous method to delegate with lamda expression
+            myDelegate += (bool p, bool q) => Console.WriteLine("XOR (lamda expression): " + ((p || q) && !(p && q)));
+
 
             //invoke delegate
             myDelegate(P, Q);
